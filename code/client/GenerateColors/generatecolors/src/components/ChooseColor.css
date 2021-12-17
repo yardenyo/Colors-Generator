@@ -1,0 +1,37 @@
+.container {
+    margin: auto;
+    width: 20%;
+    min-width: 40%;
+    border: 1px solid black;
+    font-size: 2rem;
+    border-radius: 15px;
+}
+
+.container-box {
+    margin: auto;
+    width: 30%;
+    height: 100px;
+    border: 2px solid black;
+    padding: 10px;
+    font-size: 2rem;
+}
+
+.homeButton {
+    background-color: orange;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.input {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    margin: auto;
+}
+
+h3 {
+    font-size: 1rem;
+}

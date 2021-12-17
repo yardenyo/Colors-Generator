@@ -1,0 +1,30 @@
+.history {
+    font-size: 2rem;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.history button {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    margin: 20px;
+    font-size: 1rem;
+}
+
+.history button:hover {
+    color: dodgerblue;
+}
+
+.container-history {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 1rem auto;
+    flex-flow: row wrap;
+    gap: 10px;
+}
