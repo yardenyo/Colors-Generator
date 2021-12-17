@@ -26,8 +26,8 @@ def persist_new_color(random_color):
 
 
 def get_random_color():
-    r = hex(random.randrange(0, 255))[2:]
-    g = hex(random.randrange(0, 255))[2:]
-    b = hex(random.randrange(0, 255))[2:]
+    r = random.randint(0, 255)
+    g = random.randint(0, 255)
+    b = random.randint(0, 255)
 
-    return '#' + r + g + b
+    return "{},{},{}".format(r, g, b)
