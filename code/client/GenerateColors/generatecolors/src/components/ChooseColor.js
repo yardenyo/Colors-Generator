@@ -1,32 +1,39 @@
 import "./ChooseColor.css";
-import { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import History from "./History";
+import { ColorsContext } from "./ColorsContext";
+import service from "../api";
 
 function ChooseColor() {
-  const [color, setColor] = useState("");
+  const { colorValue, colorsArr, clickHandler } = useContext(ColorsContext);
+  const [color, setColor] = colorValue;
   const [red, setRed] = useState("");
   const [green, setGreen] = useState("");
   const [blue, setBlue] = useState("");
-  const [colors, setColors] = useState([]);
-
+  const [colors, setColors] = colorsArr;
   const changeColor = () => {
-    if (
-      red < 0 ||
-      red > 255 ||
-      green < 0 ||
-      green > 255 ||
-      blue < 0 ||
-      blue > 255 ||
-      !red ||
-      !green ||
-      !blue
-    ) {
-      alert("Input must be between 0 and 255");
+    const colorRGB = `${red},${green},${blue}`;
+    if (!red || !green || !blue) {
+      console.log("input must be between 0 and 255 - cant enter the DB");
     } else {
-      setColor(`rgb(${red}, ${green}, ${blue})`);
-      setColors([...colors, color]);
+      service.ColorsService.getUserColor(colorRGB).then((response) => {
+        console.log(`the color ${response} entered the DB`);
+      });
     }
+    clickHandler(red, green, blue);
   };
+
+  useEffect(() => {
+    const rgb = color.replace("rgb(", "").replace(")", "").split(", ");
+    setRed(rgb[0]);
+    setGreen(rgb[1]);
+    setBlue(rgb[2]);
+    if (color === "") {
+      setRed("");
+      setGreen("");
+      setBlue("");
+    }
+  }, [color]);
 
   return (
     <div className={"home"}>
@@ -74,7 +81,7 @@ function ChooseColor() {
             Click to Generate
           </button>
         </div>
-        <History color={color} colors={colors} />
+        <History colors={colors} />
       </section>
     </div>
   );

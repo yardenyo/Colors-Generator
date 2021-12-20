@@ -1,13 +1,16 @@
 import "./App.css";
 import ChooseColor from "./components/ChooseColor";
 import Navbar from "./components/Navbar";
+import { ColorsProvider } from "./components/ColorsContext";
 
 function App() {
   return (
-    <div className={"app"}>
-      <Navbar />
-      <ChooseColor />
-    </div>
+    <ColorsProvider>
+      <div className={"app"}>
+        <Navbar />
+        <ChooseColor />
+      </div>
+    </ColorsProvider>
   );
 }
 
