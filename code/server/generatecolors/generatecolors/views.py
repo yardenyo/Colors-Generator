@@ -18,8 +18,17 @@ def generate_new_color(request):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-def persist_new_color(random_color):
-    new_color = Colors(color=random_color)
+@api_view(['GET'])
+@renderer_classes([JSONRenderer])
+def save_color(request):
+    get_color = request.GET.get('string', '')
+    new_color = persist_new_color(get_color)
+    serializer = ColorsSerializer(new_color)
+    return Response(serializer.data['color'], status=status.HTTP_200_OK)
+
+
+def persist_new_color(given_color):
+    new_color = Colors(color=given_color)
     new_color.save()
 
     return new_color

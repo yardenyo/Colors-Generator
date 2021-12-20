@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import "./History.css";
 import GenerateButton from "./GenerateButton";
+import { ColorsContext } from "./ColorsContext";
 
-function History(props) {
-  const [array, setArray] = useState(props.colors);
+function History() {
+  const { colorValue, colorsArr } = useContext(ColorsContext);
+  const [color, setColor] = colorValue;
+  const [colors, setColors] = colorsArr;
 
   const handleReset = () => {
-    setArray(props.colors.splice(1));
+    setColors([]);
+    setColor("");
   };
 
   return (
@@ -16,8 +20,8 @@ function History(props) {
         <button onClick={handleReset}>reset</button>
       </div>
       <div className="container-history">
-        {props.colors.slice(1).map((color) => (
-          <GenerateButton color={color} />
+        {colors.map((color, index) => (
+          <GenerateButton color={color} key={index} />
         ))}
       </div>
     </div>

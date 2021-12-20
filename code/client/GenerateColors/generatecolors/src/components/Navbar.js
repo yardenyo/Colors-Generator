@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import "./Navbar.css";
 import service from "../api";
+import { ColorsContext } from "./ColorsContext";
 
 function Navbar() {
-  const [color, setColor] = useState("");
+  const { clickHandler } = useContext(ColorsContext);
+  const changeColor = clickHandler;
 
   const generateNewColorOnClick = () => {
     service.ColorsService.getRandomColor().then((color) => {
-      console.log(color);
-      setColor(color.color);
-      console.log(color.color);
+      let colorArray = color.color.split(",");
+      changeColor(colorArray[0], colorArray[1], colorArray[2]);
     });
   };
 
@@ -17,15 +18,10 @@ function Navbar() {
     <section>
       <div className="navbar-dark">
         <div>
-          <a href="javascript:window.location.reload(true)">
-            <h1>Color Generator</h1>
-          </a>
+          <h1>Color Generator</h1>
         </div>
-
         <div>
-          <a className={"href"} onClick={generateNewColorOnClick}>
-            <h2>Random</h2>
-          </a>
+          <h2 onClick={generateNewColorOnClick}>Random</h2>
         </div>
       </div>
     </section>
